@@ -1,4 +1,4 @@
-﻿namespace MohioTechnicalBaseTest
+﻿namespace PatientCare.Services.Enums
 {
     public enum Outcome
     {

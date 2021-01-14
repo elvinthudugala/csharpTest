@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Source/.vs/MohioTechnicalBaseTest
+/Source/MohioTechnicalBaseTest/bin/Debug/net5.0
+/Source/MohioTechnicalBaseTest/obj
+/Source/PatientCare.Repository/bin/Debug/net5.0
+/Source/PatientCare.Repository/obj
+/Source/PatientCare.Repository.Tests/bin/Debug
+/Source/PatientCare.Repository.Tests/obj
+/Source/PatientCare.Services/bin/Debug/net5.0
+/Source/PatientCare.Services/obj
+/Source/PatientCare.Services.Tests/bin/Debug
+/Source/PatientCare.Services.Tests/obj
