@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MohioTechnicalBaseTest
+namespace PatientCare.Repository.Models
 {
     public class Immunisation
     {
@@ -9,9 +9,11 @@ namespace MohioTechnicalBaseTest
         /// </summary>
         public int ImmunisationId { get; set; }
 
+        // public int PatientId { get; set; }
+
         public string Vaccine { get; set; }
 
-        public Outcome? Outcome { get; set; }
+        public int? Outcome { get; set; }
 
         public DateTime CreatedDate { get; set; }
     }

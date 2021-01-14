@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MohioTechnicalBaseTest", "MohioTechnicalBaseTest\MohioTechnicalBaseTest.csproj", "{DB104D81-EE49-4808-BEFA-BB7868084606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MohioTechnicalBaseTest", "MohioTechnicalBaseTest\MohioTechnicalBaseTest.csproj", "{DB104D81-EE49-4808-BEFA-BB7868084606}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientCare.Repository", "PatientCare.Repository\PatientCare.Repository.csproj", "{522D67AB-07F4-41E6-B04C-D125789D2B65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientCare.Services", "PatientCare.Services\PatientCare.Services.csproj", "{CA75C0B6-5693-466F-9732-CADAB331F257}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientCare.Repository.Tests", "PatientCare.Repository.Tests\PatientCare.Repository.Tests.csproj", "{B59C9D9B-0332-40C5-8F85-AFA6A21DDAFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientCare.Services.Tests", "PatientCare.Services.Tests\PatientCare.Services.Tests.csproj", "{75CABE65-90D1-4F8E-BB12-76327B4AD259}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{DB104D81-EE49-4808-BEFA-BB7868084606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB104D81-EE49-4808-BEFA-BB7868084606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB104D81-EE49-4808-BEFA-BB7868084606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{522D67AB-07F4-41E6-B04C-D125789D2B65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{522D67AB-07F4-41E6-B04C-D125789D2B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{522D67AB-07F4-41E6-B04C-D125789D2B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{522D67AB-07F4-41E6-B04C-D125789D2B65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA75C0B6-5693-466F-9732-CADAB331F257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA75C0B6-5693-466F-9732-CADAB331F257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA75C0B6-5693-466F-9732-CADAB331F257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA75C0B6-5693-466F-9732-CADAB331F257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B59C9D9B-0332-40C5-8F85-AFA6A21DDAFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B59C9D9B-0332-40C5-8F85-AFA6A21DDAFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B59C9D9B-0332-40C5-8F85-AFA6A21DDAFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B59C9D9B-0332-40C5-8F85-AFA6A21DDAFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75CABE65-90D1-4F8E-BB12-76327B4AD259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75CABE65-90D1-4F8E-BB12-76327B4AD259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75CABE65-90D1-4F8E-BB12-76327B4AD259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75CABE65-90D1-4F8E-BB12-76327B4AD259}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
