@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MohioTechnicalBaseTest
 {
@@ -16,20 +17,29 @@ namespace MohioTechnicalBaseTest
         /// Must not be allowed to change.
         /// </summary>
         public DateTime CreatedDate { get; set; }
+
+        public Patient()
+        {
+            _immunisationList = new List<Immunisation>();
+        }
         
         public void Add(Immunisation immunisation)
         {
-            throw new NotImplementedException();
+            //The Id is in-use, generate new Id
+            if (_immunisationList.Any(i => i.ImmunisationId == immunisation.ImmunisationId))
+                immunisation.ImmunisationId = GetNextAvailableId; 
+
+            _immunisationList.Add(immunisation);
         }
 
         public Immunisation Get(int immunisationId)
         {
-            throw new NotImplementedException();
+            return _immunisationList.Where(i => i.ImmunisationId == immunisationId).FirstOrDefault();
         }
 
         public void Remove(int immunisationId)
         {
-            throw new NotImplementedException();
+            _immunisationList.RemoveAll(i => i.ImmunisationId == immunisationId);
         }
 
         /// <summary>
@@ -37,7 +47,7 @@ namespace MohioTechnicalBaseTest
         /// </summary>
         public decimal GetTotal()
         {
-            throw new NotImplementedException();
+            return _immunisationList.Where(i => i.CreatedDate < DateTime.Now.AddMonths(-1)).Count();
         }
 
         /// <summary>
@@ -46,7 +56,16 @@ namespace MohioTechnicalBaseTest
         /// <param name="sourcePatient">patient to merge from</param>
         public void Merge(Patient sourcePatient)
         {
-            throw new NotImplementedException();
+            MergeImmunisationList(sourcePatient._immunisationList);
+        }
+        
+        private void MergeImmunisationList(List<Immunisation> sourceList)
+        {
+            if (sourceList == null)
+                return;
+
+            foreach (Immunisation i in sourceList)
+                Add(i);
         }
 
         /// <summary>
@@ -54,7 +73,20 @@ namespace MohioTechnicalBaseTest
         /// </summary>
         public Patient Clone()
         {
-            throw new NotImplementedException();
+            Patient newPatient =  new Patient
+            {
+                Id = Id,
+                CreatedDate = CreatedDate,
+            };
+
+            newPatient.MergeImmunisationList((from i in _immunisationList
+                                              select new Immunisation {
+                                                  ImmunisationId = i.ImmunisationId,
+                                                  Vaccine = i.Vaccine,
+                                                  Outcome = i.Outcome,
+                                                  CreatedDate = i .CreatedDate,
+                                              }).ToList());
+            return newPatient;
         }
 
         /// <summary>
@@ -63,7 +95,10 @@ namespace MohioTechnicalBaseTest
         /// </summary>
         public override string ToString()
         {
-            throw new NotImplementedException();
+            //Use ToShortDateString() for datetime to match the computer's culture set up
+            return $"Id: {Id}, CreatedDate: {CreatedDate.ToShortDateString()}, ImmunisationListCount: {_immunisationList.Count}";
         }
+
+        private int GetNextAvailableId => !_immunisationList.Any()? 1 : _immunisationList.Max(i => i.ImmunisationId) + 1;
     }
 }
