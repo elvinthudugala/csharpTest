@@ -1,7 +1,8 @@
 ﻿using System;
-
+using MohioTechnicalBaseTest.Common;
 namespace MohioTechnicalBaseTest
 {
+
     public class Immunisation
     {
         /// <summary>

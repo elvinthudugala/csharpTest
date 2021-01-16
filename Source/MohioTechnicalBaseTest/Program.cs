@@ -21,8 +21,35 @@
     When you have finished the solution please do a pull request to original repository (push only the necessary files)
 */
 
+/*   Assumption: - 
+ *   1. Original Test data provided in the below method is not changed, so console output contains result + exception:
+ *                              CreatePatientWithOneImmunisation, 
+ *                              CreatePatientWithMultipleImmunisation,
+ *                              RemoveImmunisation
+ *                              MergePatients
+ *                              ClonePatient
+ *                              PatientToString
+ * 
+ *   2. Test Cases covered the duplicate Immunisation Id and Patient Id 
+ *   
+ *   3. Few Use Cases followed are: 
+ *              a. If the Patient contains Immunisation Records, and if someone tries to Add or Merge the Immunisation Record with same ID then it does not add or merge, just ignore
+ *              b. Patient Created Date can be set once while creation but cannot be changed. Instead of private setter, I have used .net5 init feature
+ *              
+ *   4. Application Architecture is below 
+ *         
+ *              UI           =>          Application       =>          Business     => (future scope =>  Infrastructure   Database )
+  *         
+ *       Console Application             
+ *         Program.cs                PatientImmunisationAPI           Model  ( Just Entity Classes)
+ *                                                                    ModelExtension (Behavior of Entity Classes)
+ *   5. Added XUnit Test Project
+ *   
+ *   6. Added NewtonsoftJSON Project for Serialisation and Deserialisation
+ * */
+
 using System;
-using System.Linq;
+using MohioTechnicalBaseTest.Application;
 
 namespace MohioTechnicalBaseTest
 {
@@ -31,188 +58,14 @@ namespace MohioTechnicalBaseTest
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Mohio Technical Test 1");
-
-            CreatePatientWithOneImmunisation();
-            CreatePatientWithMultipleImmunisation();
-            RemoveImmunisation();
-            MergePatients();
-            ClonePatient();
-            PatientToString();
-        }
-        
-        private static void CreatePatientWithOneImmunisation()
-        {
-            var patient = new Patient
-            {
-                Id = 100,
-                CreatedDate = DateTime.Now
-            };
-
-            patient.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu Diabetes",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now
-            });
-
-            Console.WriteLine(patient.GetTotal());
+            PatientImmunisationAPI.CreatePatientWithOneImmunisation();
+            PatientImmunisationAPI.CreatePatientWithMultipleImmunisation();
+            PatientImmunisationAPI.RemoveImmunisation();
+            PatientImmunisationAPI.MergePatients();
+            PatientImmunisationAPI.ClonePatient();
+            PatientImmunisationAPI.PatientToString();
         }
 
-        private static void CreatePatientWithMultipleImmunisation()
-        {
-            var patient = new Patient
-            {
-                Id = 100,
-                CreatedDate = DateTime.Now
-            };
 
-            patient.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu Diabetes",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now
-            });
-
-            patient.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu 65+",
-                Outcome = Outcome.NonResponder,
-                CreatedDate = DateTime.Now
-            });
-
-            patient.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu Vaccine PHO",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now.AddMonths(-2)
-            });
-
-            Console.WriteLine(patient.GetTotal());
-        }
-
-        private static void RemoveImmunisation()
-        {
-            var patient = new Patient
-            {
-                Id = 100,
-                CreatedDate = DateTime.Now
-            };
-
-            patient.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu Diabetes",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now
-            });
-
-            patient.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu 65+",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now.AddDays(-15)
-            });
-
-            patient.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu Vaccine PHO",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now.AddMonths(-2)
-            });
-
-            patient.Remove(10);
-            Console.WriteLine(patient.GetTotal());
-        }
-
-        private static void MergePatients()
-        {
-            var patient1 = new Patient
-            {
-                Id = 100,
-                CreatedDate = DateTime.Now
-            };
-
-            patient1.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu Diabetes",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now
-            });
-
-            var patient2 = new Patient
-            {
-                Id = 100,
-                CreatedDate = DateTime.Now
-            };
-
-            patient2.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu 65+",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now.AddDays(-15)
-            });
-
-            patient1.Merge(patient2);
-            Console.WriteLine(patient1.GetTotal());
-        }
-
-        private static void ClonePatient()
-        {
-            var patient1 = new Patient
-            {
-                Id = 100,
-                CreatedDate = DateTime.Now
-            };
-
-            patient1.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu Diabetes",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now
-            });
-
-            var patient2 = patient1.Clone();
-
-            patient2.Get(10).Outcome = Outcome.AlternativeGiven;
-
-            Console.WriteLine(patient1.GetTotal());
-            Console.WriteLine(patient2.GetTotal());
-        }
-
-        private static void PatientToString()
-        {
-            var patient = new Patient
-            {
-                Id = 100,
-                CreatedDate = DateTime.Now
-            };
-
-            patient.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu Diabetes",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now
-            });
-
-            patient.Add(new Immunisation
-            {
-                ImmunisationId = 10,
-                Vaccine = "Flu Vaccine PHO",
-                Outcome = Outcome.Given,
-                CreatedDate = DateTime.Now.AddMonths(-2)
-            });
-
-            Console.WriteLine(patient.ToString());
-        }
     }
 }
