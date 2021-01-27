@@ -1,4 +1,4 @@
-﻿namespace MohioTechnicalBaseTest
+﻿namespace MohioTechnicalBase.Core
 {
     public enum Outcome
     {
